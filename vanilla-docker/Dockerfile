@@ -4,7 +4,7 @@ MAINTAINER Christian Oelsner <c.oelsner@web.de>
 
 RUN apt-get update && apt-get install -y zip wget && apt-get clean 
 
-ENV VERSION=1353 ZIP=terraria-server.zip CONFIG=/opt/terraria/Linux/serverconfig.txt
+ENV VERSION=1351 ZIP=terraria-server.zip CONFIG=/opt/terraria/Linux/serverconfig.txt
 
 WORKDIR /opt/terraria
 
@@ -13,9 +13,7 @@ WORKDIR /opt/terraria
 
 ADD http://terraria.org/server/terraria-server-${VERSION}.zip ${ZIP}
 
-RUN unzip $ZIP $VERSION'/Linux/*' \
-  && mv $VERSION'/Linux/' 'Linux/' \
-  && rm $ZIP \
+RUN unzip $ZIP 'Linux/*' && rm $ZIP \
   && chmod -R a+rw ./Linux/* \
   && chmod a+x ./Linux/TerrariaServer*
 
