@@ -4,7 +4,7 @@ MAINTAINER Christian Oelsner <c.oelsner@web.de>
 
 RUN apt-get update && apt-get install -y zip wget && apt-get clean 
 
-ENV VERSION=1353 ZIP=terraria-server.zip
+ENV VERSION=1353 ZIP=terraria-server.zip CONFIG=/opt/terraria/Linux/serverconfig.txt
 
 WORKDIR /opt/terraria
 
@@ -24,4 +24,4 @@ EXPOSE 7777
 
 ADD serverconfig.txt ./Linux/
 
-ENTRYPOINT ["./Linux/TerrariaServer", "-x64", "-config", "Linux/serverconfig.txt"]
+ENTRYPOINT ./Linux/TerrariaServer -x64 -config $CONFIG
