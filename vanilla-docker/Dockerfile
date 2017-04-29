@@ -4,7 +4,7 @@ MAINTAINER Christian Oelsner <c.oelsner@web.de>
 
 RUN apt-get update && apt-get install -y zip wget && apt-get clean 
 
-ENV VERSION=1351 ZIP=terraria-server.zip
+ENV VERSION=1353 ZIP=terraria-server.zip
 
 WORKDIR /opt/terraria
 
