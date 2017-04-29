@@ -2,7 +2,7 @@ FROM ubuntu:14.04.4
 
 MAINTAINER Christian Oelsner <c.oelsner@web.de>
 
-RUN apt-get update && apt-get install -y zip wget && apt-get clean 
+RUN apt-get update && apt-get install -y unzip
 
 ENV VERSION=1353 ZIP=terraria-server.zip
 
@@ -13,7 +13,9 @@ WORKDIR /opt/terraria
 
 ADD http://terraria.org/server/terraria-server-${VERSION}.zip ${ZIP}
 
-RUN unzip $ZIP 'Linux/*' && rm $ZIP \
+RUN unzip $ZIP $VERSION'/Linux/*' \
+  && mv $VERSION'/Linux/' 'Linux/' \
+  && rm $ZIP \
   && chmod -R a+rw ./Linux/* \
   && chmod a+x ./Linux/TerrariaServer*
 
@@ -23,4 +25,3 @@ EXPOSE 7777
 ADD serverconfig.txt ./Linux/
 
 ENTRYPOINT ["./Linux/TerrariaServer", "-x64", "-config", "Linux/serverconfig.txt"]
-
